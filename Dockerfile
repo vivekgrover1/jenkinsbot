@@ -18,7 +18,7 @@ ENV CHATBOT_NAME "jenkinsbot"
 ENV EC2_HOST "ec2-35-154-129-12.ap-south-1.compute.amazonaws.com"
 ENV USER_PASS "test"
 
-ADD init.sql /docker-entrypoint-initdb.d
+RUN cd /docker-entrypoint-initdb.d;wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/init.sql 
 RUN chmod 777 /docker-entrypoint-initdb.d/init.sql
 
 ENV MYSQL_ROOT_PASSWORD secretadmin
