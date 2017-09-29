@@ -13,8 +13,8 @@ RUN cd /root/bot;wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/
  wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/slackbot.py && \
  wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/start_app.py
 
-ENV SLACK_BOT_TOKEN="xoxb-247103507941-IFG9viTV4sSJR4Ul0mUmSRee" CHATBOT_NAME="jenkinsbot" \
-EC2_HOST="ec2-35-154-129-12.ap-south-1.compute.amazonaws.com" USER_PASS="vivek"
+ENV SLACK_BOT_TOKEN="test" CHATBOT_NAME="jenkinsbot" \
+EC2_HOST="ec2-35-154-129-12.ap-south-1.compute.amazonaws.com" USER_PASS="test"
 
 RUN cd /docker-entrypoint-initdb.d;wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/init.sql && \
 chmod 777 /docker-entrypoint-initdb.d/init.sql
