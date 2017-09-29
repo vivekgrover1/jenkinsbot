@@ -5,7 +5,7 @@ import pymysql
 def get_status(job_id,user):
 
 # Open database connection
-  db = pymysql.connect("localhost","testuser","password","testdb" )
+  db = pymysql.connect("localhost","jenkinsbot","jenkinsbot","jenkinsbotdb"  )
 
 # prepare a cursor object using cursor() method
   cursor = db.cursor()
@@ -28,7 +28,7 @@ def get_status(job_id,user):
 
 def update_status(job_id,user):
 
-   db = pymysql.connect("localhost","testuser","password","testdb" )
+   db = pymysql.connect("localhost","jenkinsbot","jenkinsbot","jenkinsbotdb"  )
    cursor = db.cursor()
 
    sql = "update access_command set {0}='Approved' where username='{1}'".format(job_id,user)
@@ -48,7 +48,7 @@ def update_status(job_id,user):
 
 def add_user(user):
 
-   db = pymysql.connect("localhost","testuser","password","testdb" )
+   db = pymysql.connect("localhost","jenkinsbot","jenkinsbot","jenkinsbotdb"  )
    cursor = db.cursor()
 
    sql = "insert into access_command values ('%s','Not Approved','Not Approved','Not Approved')" %user
