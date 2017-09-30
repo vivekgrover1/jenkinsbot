@@ -31,6 +31,19 @@ def get_bot_id(BOT_NAME,slack_client):
        for user in users:
            if 'name' in user and user.get('name') == BOT_NAME:
              return (user.get('id'))
+            
+def get_im_id(user_id,slack_client):
+    """
+        This function gets the id of bot based on its name in slack team.
+        We need the id because it allows us to parse the message directed at bot.
+
+    """
+    api_call = slack_client.api_call("im.list")
+    if api_call.get('ok'):
+       ims = api_call.get('ims')
+       for user in ims:
+           if 'user' in user and user.get('user') == userid:
+             return (user.get('id'))
 
 
 
