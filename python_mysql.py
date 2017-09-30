@@ -11,7 +11,7 @@ def get_status(job_id,user):
   cursor = db.cursor()
 
 # Prepare SQL query to INSERT a record into the database.
-  sql = "select {0} from access_command where username='{1}'".format(job_id,user)
+  sql = "select {0} from jenkinsbot_job_status where username='{1}'".format(job_id,user)
   try:
    # Execute the SQL command
       cursor.execute(sql)
@@ -31,7 +31,7 @@ def update_status(job_id,user):
    db = pymysql.connect("localhost","jenkinsbot","jenkinsbot","jenkinsbotdb"  )
    cursor = db.cursor()
 
-   sql = "update access_command set {0}='Approved' where username='{1}'".format(job_id,user)
+   sql = "update jenkinsbot_job_status set {0}='Approved' where username='{1}'".format(job_id,user)
 
    try:
 
@@ -51,7 +51,7 @@ def add_user(user):
    db = pymysql.connect("localhost","jenkinsbot","jenkinsbot","jenkinsbotdb"  )
    cursor = db.cursor()
 
-   sql = "insert into access_command values ('%s','Not Approved','Not Approved','Not Approved')" %user
+   sql = "insert into jenkinsbot_job_status values ('%s','Not Approved','Not Approved','Not Approved')" %user
 
    try:
 
