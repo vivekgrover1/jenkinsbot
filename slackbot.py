@@ -42,7 +42,7 @@ def get_im_id(user_id,slack_client):
     if api_call.get('ok'):
        ims = api_call.get('ims')
        for user in ims:
-           if 'user' in user and user.get('user') == userid:
+           if 'user' in user and user.get('user') == user_id:
              return (user.get('id'))
 
 
