@@ -18,7 +18,7 @@ def update_message(channel_id,ts_id,mesg):
     )
 
 # send the message with button
-def send_interactive_message(username,job_id):
+def send_interactive_message(username,job_id,im_id):
     """
 
     """
@@ -27,7 +27,7 @@ def send_interactive_message(username,job_id):
     channels_call = slack_client.api_call("im.list")
     slack_client.api_call(
         "chat.postMessage",
-        channel= 'D6PQR6H7S',
+        channel='{0}'.format(im_id),
         as_user=False,
         attachments=[{"text": "@{0} has send the request for approval of job_id_{1}.\n Do you Approve the Request?".format(username,job_id),"attachment_type": "default","callback_id": "{0}_{1}".format(username,job_id) ,"actions": [{"name": "option","text": "Approve","type": "button","value": "Approve" },{
                     "name": "no",
@@ -37,6 +37,7 @@ def send_interactive_message(username,job_id):
                 }]}]
 
     )
+
 
 # send the message without button
 def send_message_without_button(username,msg):
