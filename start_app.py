@@ -32,6 +32,7 @@ def message_actions():
     username=form_json["user"]["name"]
     user_id=callback.split('_')[0]
     job_id=callback.split('_')[1]
+    user_chan_id=callback.split('_')[2]
 
     if selection == "Yes":
        mesg="Your request has been sent to the Admin for the Approval of job_id_{0}.".format(job_id)
@@ -41,7 +42,7 @@ def message_actions():
         SLACK_NAME= os.environ.get('APPROVER_SLACK_NAME')
         userid=slackbot.get_bot_id(SLACK_NAME,slack_client)
         im_id=slackbot.get_im_id(userid,slack_client)
-        slack_message.send_interactive_message(username,job_id,im_id)
+        slack_message.send_interactive_message(username,job_id,im_id,user_chan_id)
         
     elif selection == "bad":
        mesg="You choose not to send your request to Admin for Approval."
@@ -55,7 +56,7 @@ def message_actions():
         slack_message.update_message(chan_id,msg_ts,mesg)
 
         mesg2="Sorry! Your Request has been rejected by Admin."
-        slack_message.send_message_without_button(user_id,mesg2)
+        slack_message.send_message_without_button(user_id,mesg2,user_chan_id)
 
     elif selection == "Approve":
         mesg="Thanks, I will inform the user!"
@@ -63,7 +64,7 @@ def message_actions():
         job="job_id_" +job_id
         python_mysql.update_status(job,user_id)
         mesg2="Your Request has been approved for {0} now you can execute the command".format(job)
-        slack_message.send_message_without_button(user_id,mesg2)
+        slack_message.send_message_without_button(user_id,mesg2,user_chan_id)
 
 
     return make_response("", 200)
