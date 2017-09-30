@@ -57,7 +57,7 @@ def handle_command(command, channel,msg_id,user_id):
     if (command == "member joined"):
        msg=" :slack: Welcome to the channel, Here you can instruct the jenkinsbot to execute the job based on the id.\n\nYou can use @jenkinsbot help message to get the usage details.\n\nPlease note you need to get the Approval from Admin for every job that you will execute."
        python_mysql.add_user(username)
-       slack_message.send_message_without_button(username,msg)
+       slack_message.send_message_without_button(username,msg,channel)
     else:
 
      response,status,color,job_id=slack_cmd_process.cmd_process(command,username)
@@ -71,7 +71,7 @@ def handle_command(command, channel,msg_id,user_id):
 
      else:
         slack_client.api_call("chat.postMessage", channel=channel,
-                 text="<@%s> " %user_id ,as_user=True,attachments=[{"text": "%s" %response,"color":"%s" %color, "attachment_type": "default","callback_id": "{0}_{1}".format(username,job_id),"actions": [{"name": "option","text": "Send it in!","type": "button","value": "Yes" },{
+                 text="<@%s> " %user_id ,as_user=True,attachments=[{"text": "%s" %response,"color":"%s" %color, "attachment_type": "default","callback_id": "{0}_{1}_{2}".format(username,job_id,channel),"actions": [{"name": "option","text": "Send it in!","type": "button","value": "Yes" },{
                     "name": "no",
                     "text": "Not now, may be later!",
                     "type": "button",
