@@ -37,7 +37,12 @@ def message_actions():
        mesg="Your request has been sent to the Admin for the Approval of job_id_{0}.".format(job_id)
        if (user_id == username):
         slack_message.update_message(chan_id,msg_ts,mesg)
-        slack_message.send_interactive_message(username,job_id)
+        slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+        SLACK_NAME= os.environ.get('APPROVER_SLACK_NAME')
+        userid=slackbot.get_bot_id(SLACK_NAME,slack_client)
+        im_id=slackbot.get_im_id(userid,slack_client)
+        slack_message.send_interactive_message(username,job_id,im_id)
+        
     elif selection == "bad":
        mesg="You choose not to send your request to Admin for Approval."
        if (user_id == username):
