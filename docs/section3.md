@@ -12,7 +12,7 @@ Please copy the bot token from the page and save it you will need to use it whil
 
 When you are done, make sure to click on **Install App** and authorize the bot on next page..
 
-![Install App](https://s3.ap-south-1.amazonaws.com/jenkinsbot/install.PNG)
+![Install App](https://s3.ap-south-1.amazonaws.com/jenkinsbot/install2.PNG)
 
 ---
 **Previous [Section 2: Subscribe Events and Enable Interactive Components](./../docs/section2.md)**  
