@@ -10,8 +10,6 @@ In your browser, on [api.slack.com/apps](https://api.slack.com/apps) you'll find
 
 ![create_slack_app_detail](https://s3.ap-south-1.amazonaws.com/jenkinsbot/newapp.PNG)
 
-:speak_no_evil:
-
 
 ### Adding A Bot User
 
