@@ -24,4 +24,5 @@ Let's create new **Bot User** so our app can communicate on Slack. On the left s
 
 ---
 **Next [Section 2: Subscribe to Events and Enable Interactive Buttons](./../docs/section2.md)**  
+**Previous [README](./../README.md)** 
  
