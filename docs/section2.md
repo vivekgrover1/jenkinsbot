@@ -13,7 +13,7 @@ This project uses the following events:
 - [message.channels](https://api.slack.com/events/message.channels)
 - [message.im](https://api.slack.com/events/message.im)
 
-After you've subscribed to all the events your app will need, you need to enable the interactive components.
+After you've subscribed to all the events your app will need, you need to enable the interactive components. Before Proceeding, make sure to save the changes.
 
 On your app's settings page you'll find **Interactive Components** on the left navigation bar.
 
