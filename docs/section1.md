@@ -23,5 +23,5 @@ Let's create new **Bot User** so our app can communicate on Slack. On the left s
 ![add_bot_user](https://s3.ap-south-1.amazonaws.com/jenkinsbot/createapp3.PNG)
 
 ---
-**Next [Section 3: Subscribe to Events](./../docs/Section-3.md)**  
-**Previous [Section 1: ~~Steal~~ Build This Bot](./../docs/Section-1.md)**  
+**Next [Section 2: Subscribe to Events and Enable Interactive Buttons](./../docs/section2.md)**  
+ 
