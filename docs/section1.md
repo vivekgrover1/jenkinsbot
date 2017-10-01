@@ -4,7 +4,7 @@
 
 In your browser, on [api.slack.com/apps](https://api.slack.com/apps) you'll find a green button labeled [Create New App](https://api.slack.com/apps/new) on the top right of the page.
 
-![create_new_slack_app]()
+![create_new_slack_app](https://s3.ap-south-1.amazonaws.com/jenkinsbot/createapp0.PNG)
 
 :point_right: :white_check_mark:
 
@@ -19,8 +19,6 @@ In your browser, on [api.slack.com/apps](https://api.slack.com/apps) you'll find
 ### Adding A Bot User
 
 Let's get ourselves a shiny new **Bot User** so our app can communicate on Slack. On the left side navigation of your app's settings page you'll find the **Bot Users** tab where you can create a new bot user for your app.
-
-![app_settings_nav_bot_user](https://cloud.githubusercontent.com/assets/4828352/20548580/8826d680-b0d9-11e6-96bc-84cfdabff6f4.png)
 
 ![add_bot_user](https://s3.ap-south-1.amazonaws.com/jenkinsbot/createapp3.PNG)
 
