@@ -6,7 +6,7 @@ On your app's settings page you'll find **OAuth & Permissions** on the left navi
 
 Now under the **Bot User OAuth Access Token** section you'll be able to find the Bot Token.
 
-Please copy the bot token for the page and save it you will need to use it while building the bot.
+Please copy the bot token from the page and save it you will need to use it while building the bot.
 
 ![Bot User Access token](https://s3.ap-south-1.amazonaws.com/jenkinsbot/token.PNG)
 
