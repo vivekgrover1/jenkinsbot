@@ -12,9 +12,6 @@ In your browser, on [api.slack.com/apps](https://api.slack.com/apps) you'll find
 
 :speak_no_evil:
 
-![slack_app_created](https://s3.ap-south-1.amazonaws.com/jenkinsbot/createapp2.PNG)
-
-
 
 ### Adding A Bot User
 
