@@ -19,7 +19,7 @@ On your app's settings page you'll find **Interactive Components** on the left n
 
 Click on button Enable Inteactive Components and Add the URL like below:
 
-http://HOST:PORT_NO/slack/message_actions (Select the post of your machine which you want to expose)
+http://HOST:PORT_NO/slack/message_actions (Select the port of your machine which you want to expose)
 
 ![Enable Inteactive Components](https://s3.ap-south-1.amazonaws.com/jenkinsbot/events2.PNG)
 
