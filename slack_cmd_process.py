@@ -7,8 +7,8 @@ import time
 import slackbot
 import slack_message
 
-help="""Use below commands to use the bot\n\n@jenkinsbot command list jobs\n
-@jenkinsbot command execute job <job id> \n
+help="""Use below commands to use the bot\n\n@bot_name command list jobs\n
+@bot_name command execute job <job id> \n
 """
 
 list_cmd="""List of the Commands:\n
