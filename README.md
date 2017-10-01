@@ -12,4 +12,4 @@ Let's start with the jenkinsSlack bot :sparkles:
 
 * [Section 1: Create a Slack App and Bot User](docs/section1.md)  
 * [Section 2: Subscribe to Events and Enable Interactive Components](docs/section2.md)  
-* [Section 3: App Credentials](docs/section3.md)
+* [Section 3: Install Slack App](docs/section3.md)
