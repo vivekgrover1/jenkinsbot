@@ -4,6 +4,6 @@ This bot is an example implementation of building a Slack App with Slack's Pytho
 
 JenkinsSlack Bot is designed to greet new users on your team and introduce them to some nifty features in Slack.
 
->![onboarding](https://s3.ap-south-1.amazonaws.com/jenkinsbot/ezgif.com-optimize.gif)
+>![JenkinsSlackbot](https://s3.ap-south-1.amazonaws.com/jenkinsbot/ezgif.com-optimize.gif)
 
 Let's go write some code. You got this! :sparkles:
