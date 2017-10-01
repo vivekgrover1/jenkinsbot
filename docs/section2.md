@@ -2,7 +2,7 @@
 
 Once you have created the Slack App and Bot User, let's have it subscribe to some events in Slack!
 
-On your app's settings page you'll find **Event Subscriptions** on the left navigation bar.
+On your app's settings page you'll find **Event Subscriptions** on the left navigation bar and turn on the Enable Events.
 
 Near the bottom of the page under the **WorkSpace Events** section you'll be able to subscribe your bot to the events.
 
