@@ -18,7 +18,7 @@ Let's start with the jenkinsSlack bot :sparkles:
 ### Specify the Environment Variable in docker file.
 
 ```
-ENV SLACK_BOT_TOKEN="slack-token" CHATBOT_NAME="jenkinsbot" \
+ENV SLACK_BOT_TOKEN="slack-token" CHATBOT_NAME="your_bot_name" \
 APPROVER_SLACK_NAME="SLACK_USER_ID" 
 
 ```
