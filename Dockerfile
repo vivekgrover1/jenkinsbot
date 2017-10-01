@@ -15,8 +15,8 @@ RUN cd /root/bot;wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/
  wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/start_bot.sh
 
 
-ENV SLACK_BOT_TOKEN="xoxb-247103507941-7cHoMFmBi3ctJyLpDGnl9hjl" CHATBOT_NAME="jenkinsbot" \
-APPROVER_SLACK_NAME="vivekngrover"
+ENV SLACK_BOT_TOKEN="your_bot_token" CHATBOT_NAME="jenkinsbot" \
+APPROVER_SLACK_NAME="SLACK_APPROVER_ID"
 
 
 RUN cd /docker-entrypoint-initdb.d;wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/init.sql && \
