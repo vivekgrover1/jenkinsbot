@@ -1,5 +1,5 @@
 # JenkinsSlack Bot
-## Deploying a JenkinsSlack bot using [Docker Container](https://api.slack.com/events-api) 
+## Deploying a JenkinsSlack bot using [Docker Container](https://github.com/vivekgrover1/jenkinsbot/blob/master/Dockerfile) 
 This bot is an implementation of CI/CD Process Integration with ChatOps and building a Slack App with Slack's Python SDK, [python-slackclient](http://python-slackclient.readthedocs.io/en/latest/).
 
 We'll cover all the steps you'll need to configure and deploy JenkinsSlack Bot to your Slack Workspace.
