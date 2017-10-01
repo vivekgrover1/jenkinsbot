@@ -20,7 +20,8 @@ APPROVER_SLACK_NAME="SLACK_APPROVER_ID"
 
 
 RUN cd /docker-entrypoint-initdb.d;wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/init.sql && \
-chmod 777 /docker-entrypoint-initdb.d/init.sql
+chmod 777 /docker-entrypoint-initdb.d/init.sql && \
+chmod 777 /root/bot/start_bot.sh
 
 
 ENV MYSQL_ROOT_PASSWORD secretadmin
