@@ -2,7 +2,7 @@
 
 Once you have subscribed the bot events and interactive components, let's install the App to the Slack Workspace
 
-On your app's settings page you'll find **OAuth & Permissions** on the left navigation bar and click on Install App to Workspace button.
+On your app's settings page you'll find **OAuth & Permissions** on the left navigation bar and click on **Install App to Workspace** button.
 
 After clicking on button, you will need to authorize the bot on next page.
 
