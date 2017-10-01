@@ -23,7 +23,7 @@ http://HOST:PORT_NO/slack/message_actions (Select the post of your machine which
 
 ![Enable Inteactive Components](https://s3.ap-south-1.amazonaws.com/jenkinsbot/events2.PNG)
 
-When you are done, make sure to **Save Changes**.
+When you are done, make sure to **Save Changes** and copy the URL you will need to have it while building the bot.
 
 ---
 **Next [Section 4:  App Credentials](./../docs/Section-4.md)**  
