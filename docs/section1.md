@@ -14,11 +14,11 @@ In your browser, on [api.slack.com/apps](https://api.slack.com/apps) you'll find
 
 ![slack_app_created](https://s3.ap-south-1.amazonaws.com/jenkinsbot/createapp2.PNG)
 
-:muscle: :tada:
+
 
 ### Adding A Bot User
 
-Let's get ourselves a shiny new **Bot User** so our app can communicate on Slack. On the left side navigation of your app's settings page you'll find the **Bot Users** tab where you can create a new bot user for your app.
+Let's create new **Bot User** so our app can communicate on Slack. On the left side navigation of your app's settings page you'll find the **Bot Users** tab where you can create a new bot user for your app.
 
 ![add_bot_user](https://s3.ap-south-1.amazonaws.com/jenkinsbot/createapp3.PNG)
 
