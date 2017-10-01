@@ -16,3 +16,4 @@ When you are done, make sure to click on **Install App** and authorize the bot o
 
 ---
 **Previous [Section 2: Subscribe Events and Enable Interactive Components](./../docs/section2.md)**  
+**Next [README](./../README.md)** 
