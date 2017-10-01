@@ -33,6 +33,8 @@ docker build -t jenkinsbot .
 ### Run the container with --publish option in run command.
 
 ```
-docker build -t jenkinsbot .
+ docker run -d -p 98:80 -it --name jenkinsbot jenkinsbot
+ 
+ docker exec jenkinsbot sh /root/bot/start_bot.sh
 
 ```
