@@ -7,4 +7,5 @@ We'll cover all the steps you'll need to configure and deploy JenkinsSlack Bot t
 JenkinsSlack Bot is designed to help DevOps engineers to execute the CI/CD Process from the chatroom. Additionally, In order to have control over unauthorized deployment of code to different application environment, there is authorization mechanism so that only approved commands can trigger the deployment. 
 
 >![JenkinsSlackbot](https://s3.ap-south-1.amazonaws.com/jenkinsbot/ezgif.com-optimize.gif)
+
 Let's start with the jenkinsSlack bot :sparkles:
