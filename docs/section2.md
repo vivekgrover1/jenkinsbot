@@ -26,5 +26,5 @@ http://HOST:PORT_NO/slack/message_actions (Select the post of your machine which
 When you are done, make sure to **Save Changes** and copy the URL you will need to have it while building the bot.
 
 ---
-**Next [Section 4:  App Credentials](./../docs/Section-4.md)**  
-**Previous [Section 2: Create a Slack App and Bot User](./../docs/Section-2.md)**  
+**Next [Section 3:  Bot Token and Install App](./../docs/section3.md)**  
+**Previous [Section 1: Create a Slack App and Bot User](./../docs/section1.md)**  
