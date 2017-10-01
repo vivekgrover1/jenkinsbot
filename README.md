@@ -10,6 +10,6 @@ JenkinsSlack Bot is designed to help DevOps engineers to execute the CI/CD Proce
 
 Let's start with the jenkinsSlack bot :sparkles:
 
-* [Section 2: Create a Slack App and Bot User](docs/Section-2.md)  
-* [Section 3: Subscribe to Events](docs/Section-3.md)  
-* [Section 4: App Credentials](docs/Section-4.md)
+* [Section 1: Create a Slack App and Bot User](docs/section1.md)  
+* [Section 2: Subscribe to Events](docs/section2.md)  
+* [Section 3: App Credentials](docs/section3.md)
