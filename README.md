@@ -13,3 +13,26 @@ Let's start with the jenkinsSlack bot :sparkles:
 * [Section 1: Create a Slack App and Bot User](docs/section1.md)  
 * [Section 2: Subscribe to Events and Enable Interactive Components](docs/section2.md)  
 * [Section 3: Install Slack App](docs/section3.md)
+
+
+### Specify the Environment Variable in docker file.
+
+```
+ENV SLACK_BOT_TOKEN="slack-token" CHATBOT_NAME="jenkinsbot" \
+APPROVER_SLACK_NAME="SLACK_USER_ID" 
+
+```
+
+
+### Building the bot from docker file.
+
+```
+docker build -t jenkinsbot .
+
+```
+### Run the container with --publish option in run command.
+
+```
+docker build -t jenkinsbot .
+
+```
