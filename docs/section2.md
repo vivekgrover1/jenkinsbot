@@ -1,4 +1,4 @@
-## Section 2: Subscribe to Events
+## Section 2: Subscribe to Events and Enable Interactive Components
 
 Once you have created the Slack App and Bot User, let's have it subscribe to some events in Slack!
 
