@@ -15,5 +15,4 @@ When you are done, make sure to click on **Install App** and authorize the bot o
 ![Install App](https://s3.ap-south-1.amazonaws.com/jenkinsbot/install.PNG)
 
 ---
-**Next [Section 4:  App Credentials](./../docs/Section-4.md)**  
-**Previous [Section 2: Create a Slack App and Bot User](./../docs/Section-2.md)**  
+**Previous [Section 2: Subscribe Events and Enable Interactive Components](./../docs/section2.md)**  
