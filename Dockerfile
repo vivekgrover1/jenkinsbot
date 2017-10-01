@@ -15,7 +15,7 @@ RUN cd /root/bot;wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/
  wget https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/start_bot.sh
 
 
-ENV SLACK_BOT_TOKEN="your_bot_token" CHATBOT_NAME="jenkinsbot" \
+ENV SLACK_BOT_TOKEN="your_bot_token" CHATBOT_NAME="your_bot_name" \
 APPROVER_SLACK_NAME="SLACK_APPROVER_ID"
 
 
