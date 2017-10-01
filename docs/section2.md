@@ -6,7 +6,7 @@ On your app's settings page you'll find **Event Subscriptions** on the left navi
 
 Near the bottom of the page under the **WorkSpace Events** section you'll be able to subscribe your bot to the events.
 
-![add_WorkSpace_events](https://s3.ap-south-1.amazonaws.com/jenkinsbot/events.PNG)
+![add_WorkSpace_events](https://s3.ap-south-1.amazonaws.com/jenkinsbot/events_new.PNG)
 
 This project uses the following events:
 
