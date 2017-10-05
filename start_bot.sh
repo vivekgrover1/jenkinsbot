@@ -1,5 +1,6 @@
 #!/bin/sh
 echo "HI"
+service mysql start
 sleep 50
 #nohup python3.4 /root/bot/slackbot.py & 2>&1 >/dev/null
 python3.4 /root/bot/slackbot.py 
