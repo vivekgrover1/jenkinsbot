@@ -1,0 +1,14 @@
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins_slack_bot
+    build:
+      context: https://github.com/vivekgrover1/jenkinsbot.git
+      dockerfile: Dockerfile
+    ports:
+     - "98:80"
+    environment:
+      SLACK_BOT_TOKEN : "your_token"
+      CHATBOT_NAME : "bot_name"
+      APPROVER_SLACK_NAME : "Approver_slack_id"
+    restart: always
