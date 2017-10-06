@@ -1,8 +1,8 @@
 #!/bin/sh
 service mysql start
-sleep 10
-mysql -h "localhost" -u "root" "-psecretadmin" < "/docker-entrypoint-initdb.d/init.sql"
 sleep 5
+mysql -h "localhost" -u "root" "-psecretadmin" < "/docker-entrypoint-initdb.d/init.sql"
+sleep 2
 nohup python3.4 /root/bot/slackbot.py & 2>&1 >/dev/null
 nohup python3.4 /root/bot/start_app.py & 2>&1 >/dev/null
 pid1=`ps -ef | grep py | grep -v grep | grep "/root/bot/slackbot.py" | awk '{ print $2 }'`
