@@ -5,16 +5,18 @@ FROM vivek77/jenkinsbot
 MAINTAINER Vivek
 
 # Update the repository sources list
+RUN apt-get -yqq update
 
-RUN cd /root/bot;wget -Nq https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/python_mysql.py && \
- wget -Nq https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/slack_cmd_process.py && \
- wget -Nq https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/slack_message.py && \
- wget -Nq https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/slackbot.py && \
- wget -Nq https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/start_app.py && \
- wget -Nq https://raw.githubusercontent.com/vivekgrover1/jenkinsbot/master/start_bot.sh
+WORKDIR /root/bot
 
+COPY python_mysql.py slack_cmd_process.py slack_message.py slackbot.py start_app.py /root/bot/
 
-ENV SLACK_BOT_TOKEN="your_token" CHATBOT_NAME="your_bot_name" \
+ADD https://raw.githubusercontent.com/USDevOps/jenkins_slack_bot/tag_v1/init.sql /docker-entrypoint-initdb.d/
+
+RUN chmod 775 /docker-entrypoint-initdb.d/init.sql && chmod -R 775 /root
+
+RUN rm -rf /var/lib/apt/lists/* && \
+rm -rf /var/cache/apk/*
+
+ENV SLACK_BOT_TOKEN="BOT_TOKEN" CHATBOT_NAME="BOT_NAME" \
 APPROVER_SLACK_NAME="APPROVER_SLACK_ID"
-
-ENTRYPOINT /root/bot/start_bot.sh
