@@ -11,7 +11,7 @@ WORKDIR /root/bot
 
 COPY python_mysql.py slack_cmd_process.py slack_message.py slackbot.py start_app.py /root/bot/
 
-ADD https://raw.githubusercontent.com/USDevOps/jenkins_slack_bot/tag_v1/init.sql /docker-entrypoint-initdb.d/
+COPY init.sql /docker-entrypoint-initdb.d/
 
 RUN chmod 775 /docker-entrypoint-initdb.d/init.sql && chmod -R 775 /root
 
