@@ -31,7 +31,7 @@ def cmd_process(command, username,chann_id):
         return help, "approved", "good", 0
     if lis[0] == "command" and len(lis) >= 3:
         if len(lis) == 3 and lis[1] == "list" and lis[2] == "jobs":
-            return list_cmd, "approved", "good", 0
+            return list_jobs_jenkins(), "approved", "good", 0
         if len(lis) == 4 and lis[1] == "execute" and lis[2] == "job" and (
                     lis[3] == "1" or lis[3] == "2" or lis[3] == "3"):
             response, status, color = cmd_execute(username, lis[3],chann_id)
@@ -84,3 +84,14 @@ def execute_jenkins_job(job_name):
     time.sleep(8)
     last_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
     return server.get_build_console_output('{0}'.format(job_name), last_build_number)
+
+def list_jobs_jenkins():
+
+    Jenkins_url = os.environ.get('JENKINS_URL')
+    user_name = os.environ.get('JENKINS_USER')
+    user_pass = os.environ.get('JENKINS_PASS')
+    server = jenkins.Jenkins('{0}'.format(Jenkins_url), username='{0}'.format(user_name), password='{0}'.format(user_pass))
+    jobs = server.get_jobs()
+    max_length = max([len(job['name']) for job in jobs])
+    return ( '\n'.join(['{2})  <{1}|{0}> '.format(job['name'].ljust(max_length), job['url'],(counter+1)) for counter,job in enumerate(jobs)]).strip())
+
