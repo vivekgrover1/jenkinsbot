@@ -64,7 +64,7 @@ def handle_command(command, channel, msg_id, user_id):
         slack_message.send_message_without_button(username, msg, channel)
     else:
 
-        response, status, color, job_id = slack_cmd_process.cmd_process(command, username)
+        response, status, color, job_id = slack_cmd_process.cmd_process(command, username,channel)
         if status != "notapproved":
             if msg_id == "Thread_False":
                 slack_client.api_call("chat.postMessage", channel=channel,
