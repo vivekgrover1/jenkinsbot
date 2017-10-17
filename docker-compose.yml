@@ -23,11 +23,11 @@ services:
      extends: db
      entrypoint: python3.4 slackbot.py
 
-#Please set the HOST PORT to receive the events from slack inside the container
+#Please set the PUBLISHED PORT (the publicly exposed port) to receive the events from slack to your HOST MACHINE.
 
    jenkins_bot_event:
      container_name: jenkins_slack_bot_event
      extends: jenkins_bot_rtm
      ports:
-      - "HOST_PORT:80"
+      - "PUBLISHED_PORT:80"
      entrypoint: python3.4 start_app.py
