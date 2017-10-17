@@ -18,7 +18,7 @@ list_cmd = """List of the Commands:\n
 """
 
 
-def cmd_process(command, username):
+def cmd_process(command, username,chann_id):
     """
       Decide the command which is to be run based on user message directed
       at bot.
@@ -34,13 +34,13 @@ def cmd_process(command, username):
             return list_cmd, "approved", "good", 0
         if len(lis) == 4 and lis[1] == "execute" and lis[2] == "job" and (
                     lis[3] == "1" or lis[3] == "2" or lis[3] == "3"):
-            response, status, color = cmd_execute(username, lis[3])
+            response, status, color = cmd_execute(username, lis[3],chann_id)
             return response, status, color, lis[3]
 
     return "Not sure what you mean, please use help.", "approved", "danger", 0
 
 
-def cmd_execute(username, job_no):
+def cmd_execute(username, job_no,chann_id):
     job_id = "job_id_" + job_no
     value = python_mysql.get_status(job_id, username)
     if value != "Approved":
@@ -48,11 +48,11 @@ def cmd_execute(username, job_no):
                "approval from Admin to execute this command?".format(
             job_id), "notapproved", "danger"
     elif value == "Approved":
-        output = cmd_exec(username, job_no)
+        output = cmd_exec(username, job_no,chann_id)
         return output, "approved", "good"
 
 
-def cmd_exec(username, job_no):
+def cmd_exec(username, job_no,chann_id):
     """
       execute the jenkins job based on provided job id and return the console output
 
@@ -60,15 +60,15 @@ def cmd_exec(username, job_no):
     try:
 
         if job_no == "1":
-            slack_message.send_message_without_button(username, 'Please wait job is being executed...')
+            slack_message.send_message_without_button(username, 'Please wait job is being executed...',chann_id)
             output = execute_jenkins_job('job_ansible_1')
             return output
         elif job_no == "2":
-            slack_message.send_message_without_button(username, 'Please wait job is being executed...')
+            slack_message.send_message_without_button(username, 'Please wait job is being executed...',chann_id)
             output = execute_jenkins_job('job_ansible_2')
             return output
         elif job_no == "3":
-            slack_message.send_message_without_button(username, 'Please wait job is being executed...')
+            slack_message.send_message_without_button(username, 'Please wait job is being executed...',chann_id)
             output = execute_jenkins_job('job_ansible_3')
             return output
     except:
@@ -76,9 +76,10 @@ def cmd_exec(username, job_no):
 
 
 def execute_jenkins_job(job_name):
-    ec2_host = os.environ.get('EC2_HOST')
-    user_pass = os.environ.get('USER_PASS')
-    server = jenkins.Jenkins('http://{0}:8080'.format(ec2_host), username='vivek', password='{0}'.format(user_pass))
+    Jenkins_url = os.environ.get('JENKINS_URL')
+    user_name = os.environ.get('JENKINS_USER')
+    user_pass = os.environ.get('JENKINS_PASS')
+    server = jenkins.Jenkins('{0}'.format(Jenkins_url), username='{0}'.format(user_name), password='{0}'.format(user_pass))
     server.build_job('{0}'.format(job_name))
     time.sleep(8)
     last_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
