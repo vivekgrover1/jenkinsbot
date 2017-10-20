@@ -60,7 +60,7 @@ def message_actions():
         mesg = "Thanks, I will inform the user!"
         slack_message.update_message(chan_id, msg_ts, mesg)
         python_mysql.update_status(user_id)
-        mesg2 = "Your Request has been approved now you can execute the command".
+        mesg2 = "Your Request has been approved now you can execute the command"
         slack_message.send_message_without_button(user_id, mesg2, user_chan_id)
 
     return make_response("", 200)
