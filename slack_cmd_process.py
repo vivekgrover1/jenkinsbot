@@ -8,7 +8,7 @@ import slackbot
 import slack_message
 
 help = """Use below commands to use the bot\n\n@bot_name command list jobs\n
-@bot_name command execute job <job id> \n
+@bot_name command execute job <job name> \n
 """
 
 list_cmd = """List of the Commands:\n
@@ -40,13 +40,12 @@ def cmd_process(command, username,chann_id):
     return "Not sure what you mean, please use help.", "approved", "danger"
 
 
-def cmd_execute(username, job_no,chann_id):
+def cmd_execute(username, job_name,chann_id):
     
     value = python_mysql.get_status(username)
     if value != "Approved":
-        return ":slightly_frowning_face: You don't have Approval to execute the {0}.\nWould you like to get the " \
-               "approval from Admin to execute this command?".format(
-            job_id), "notapproved", "danger"
+        return ":slightly_frowning_face: You don't have Approval to execute the job.\nWould you like to get the " \
+               "approval from Admin to execute this command?", "notapproved", "danger"
     elif value == "Approved":
         output = cmd_exec(username, job_name,chann_id)
         return output, "approved", "good"
