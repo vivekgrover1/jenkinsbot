@@ -64,7 +64,7 @@ def handle_command(command, channel, msg_id, user_id):
         slack_message.send_message_without_button(username, msg, channel)
     else:
 
-        response, status, color, job_id = slack_cmd_process.cmd_process(command, username,channel)
+        response, status, color= slack_cmd_process.cmd_process(command, username,channel)
         if status != "notapproved":
             if msg_id == "Thread_False":
                 slack_client.api_call("chat.postMessage", channel=channel,
@@ -79,7 +79,7 @@ def handle_command(command, channel, msg_id, user_id):
             slack_client.api_call("chat.postMessage", channel=channel,
                                   text="<@%s> " % user_id, as_user=True, attachments=[
                     {"text": "%s" % response, "color": "%s" % color, "attachment_type": "default",
-                     "callback_id": "{0}_{1}_{2}".format(username, job_id, channel),
+                     "callback_id": "{0}_{1}".format(username, channel),
                      "actions": [{"name": "option", "text": "Send it in!", "type": "button", "value": "Yes"}, {
                          "name": "no",
                          "text": "Not now, may be later!",
