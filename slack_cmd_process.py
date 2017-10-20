@@ -18,74 +18,74 @@ list_cmd = """List of the Commands:\n
 """
 
 
-def cmd_process(command,username,chann_id):
+def cmd_process(command, username, chann_id):
     """
       Decide the command which is to be run based on user message directed
       at bot.
     """
-    lis=command.split(" ")
+    lis = command.split(" ")
 
     if lis[0].startswith("hi"):
-        return "I am doing good, How about you?","approved","good"
-    if len(lis)==1 and lis[0]=="help":
-        return help, "approved","good"
-    if lis[0]=="command" and len(lis)>=3:
-        if len(lis)==3 and lis[1]=="list" and lis[2]=="jobs" :
-           return list_jobs_jenkins(), "approved","good"
-        if len(lis)==4 and lis[1]=="execute" and lis[2]=="job" and len(lis[3])>0:
-           response,status,color=cmd_execute(username,lis[3],chann_id)
-           return response,status,color
-
+        return "I am doing good, How about you?", "approved", "good"
+    if len(lis) == 1 and lis[0] == "help":
+        return help, "approved", "good"
+    if lis[0] == "command" and len(lis) >= 3:
+        if len(lis) == 3 and lis[1] == "list" and lis[2] == "jobs":
+            return list_jobs_jenkins(), "approved", "good"
+        if len(lis) == 4 and lis[1] == "execute" and lis[2] == "job" and len(lis[3]) > 0:
+            response, status, color = cmd_execute(username, lis[3], chann_id)
+            return response, status, color
 
     return "Not sure what you mean, please use help.", "approved", "danger"
 
 
-def cmd_execute(username, job_name,chann_id):
-    
+def cmd_execute(username, job_name, chann_id):
     value = python_mysql.get_status(username)
     if value != "Approved":
         return ":slightly_frowning_face: You don't have Approval to execute the job.\nWould you like to get the " \
                "approval from Admin to execute this command?", "notapproved", "danger"
     elif value == "Approved":
-        output = cmd_exec(username, job_name,chann_id)
+        output = cmd_exec(username, job_name, chann_id)
         return output, "approved", "good"
 
 
-def cmd_exec(username, job_name,chann_id):
+def cmd_exec(username, job_name, chann_id):
     """
       execute the jenkins job based on provided job id and return the console output
 
     """
     try:
-            slack_message.send_message_without_button(username, 'Please wait job is being executed...',chann_id)
-            output = execute_jenkins_job(job_name)
-            return output   
+        slack_message.send_message_without_button(username, 'Please wait job is being executed...', chann_id)
+        output = execute_jenkins_job(job_name)
+        return output
     except:
         return "Exception"
 
 
 def execute_jenkins_job(job_name):
-    
     jenkins_url = os.environ.get('JENKINS_URL')
     user_name = os.environ.get('JENKINS_USER')
     user_pass = os.environ.get('JENKINS_PASS')
-    server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name), password='{0}'.format(user_pass))
+    server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
+                             password='{0}'.format(user_pass))
     last_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
     new_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
     server.build_job('{0}'.format(job_name))
-    while (new_build_number == last_build_number):
-      time.sleep(2)
-      new_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
+    while new_build_number == last_build_number:
+        time.sleep(2)
+        new_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
     return server.get_build_console_output('{0}'.format(job_name), new_build_number)
 
 
 def list_jobs_jenkins():
-
     jenkins_url = os.environ.get('JENKINS_URL')
     user_name = os.environ.get('JENKINS_USER')
     user_pass = os.environ.get('JENKINS_PASS')
-    server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name), password='{0}'.format(user_pass))
+    server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
+                             password='{0}'.format(user_pass))
     jobs = server.get_jobs()
     max_length = max([len(job['name']) for job in jobs])
-    return ( '\n'.join(['{2})  <{1}|{0}> '.format(job['name'].ljust(max_length), job['url'],(counter+1)) for counter,job in enumerate(jobs)]).strip())
+    return ('\n'.join(
+        ['{2})  <{1}|{0}> '.format(job['name'].ljust(max_length), job['url'], (counter + 1)) for counter, job in
+         enumerate(jobs)]).strip())
 
