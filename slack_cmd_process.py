@@ -18,24 +18,24 @@ list_cmd = """List of the Commands:\n
 """
 
 
-def cmd_process(command, username,chann_id):
+def cmd_process(command,username,chann_id):
     """
       Decide the command which is to be run based on user message directed
       at bot.
     """
-    lis = command.split(" ")
+    lis=command.split(" ")
 
     if lis[0].startswith("hi"):
-        return "I am doing good, How about you?", "approved", "good"
-    if len(lis) == 1 and lis[0] == "help":
-        return help, "approved", "good"
-    if lis[0] == "command" and len(lis) >= 3:
-        if len(lis) == 3 and lis[1] == "list" and lis[2] == "jobs":
-            return list_jobs_jenkins(), "approved", "good"
-        if len(lis) == 4 and lis[1] == "execute" and lis[2] == "job" and (
-                    lis[3] == "1" or lis[3] == "2" or lis[3] == "3"):
-            response, status, color = cmd_execute(username, lis[3],chann_id)
-            return response, status, color, lis[3]
+        return "I am doing good, How about you?","approved","good"
+    if len(lis)==1 and lis[0]=="help":
+        return help, "approved","good"
+    if lis[0]=="command" and len(lis)>=3:
+        if len(lis)==3 and lis[1]=="list" and lis[2]=="jobs" :
+           return list_jobs_jenkins(), "approved","good"
+        if len(lis)==4 and lis[1]=="execute" and lis[2]=="job" and len(lis[3])>0:
+           response,status,color=cmd_execute(username,lis[3],chann_id)
+           return response,status,color
+
 
     return "Not sure what you mean, please use help.", "approved", "danger"
 
