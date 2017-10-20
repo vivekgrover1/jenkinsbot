@@ -47,8 +47,6 @@ def message_actions():
         if user_id == username:
             slack_message.update_message(chan_id, msg_ts, mesg)
 
-
-
     elif selection == "Not Approved":
         mesg = "Thanks, I will inform the user!"
         slack_message.update_message(chan_id, msg_ts, mesg)
