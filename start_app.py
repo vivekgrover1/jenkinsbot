@@ -30,7 +30,7 @@ def message_actions():
     callback = form_json["callback_id"]
     username = form_json["user"]["name"]
     user_id = callback.split('_')[0]
-    user_chan_id = callback.split('_')[2]
+    user_chan_id = callback.split('_')[1]
 
     if selection == "Yes":
         mesg = "Your request has been sent to the Admin for the Approval"
