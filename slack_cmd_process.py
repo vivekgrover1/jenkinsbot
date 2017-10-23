@@ -46,6 +46,8 @@ def cmd_execute(username, job_name, chann_id):
                "approval from Admin to execute this command?", "notapproved", "danger"
     elif value == "Approved":
         output = cmd_exec(username, job_name, chann_id)
+        if output == "job could not be found, please try again." :
+            return output, "approved", "danger"
         return output, "approved", "good"
 
 
