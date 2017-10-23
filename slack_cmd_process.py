@@ -63,18 +63,22 @@ def cmd_exec(username, job_name, chann_id):
 
 
 def execute_jenkins_job(job_name):
-    jenkins_url = os.environ.get('JENKINS_URL')
-    user_name = os.environ.get('JENKINS_USER')
-    user_pass = os.environ.get('JENKINS_PASS')
-    server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
+    try:
+      jenkins_url = os.environ.get('JENKINS_URL')
+      user_name = os.environ.get('JENKINS_USER')
+      user_pass = os.environ.get('JENKINS_PASS')
+      server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
                              password='{0}'.format(user_pass))
-    last_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
-    new_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
-    server.build_job('{0}'.format(job_name))
-    while new_build_number == last_build_number:
-        time.sleep(2)
-        new_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
-    return server.get_build_console_output('{0}'.format(job_name), new_build_number)
+      last_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
+      new_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
+      server.build_job('{0}'.format(job_name))
+      while new_build_number == last_build_number:
+          time.sleep(2)
+          new_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
+      return server.get_build_console_output('{0}'.format(job_name), new_build_number)
+    except jenkins.NotFoundException :
+      return "job could not be found, please try again."
+    
 
 
 def list_jobs_jenkins():
