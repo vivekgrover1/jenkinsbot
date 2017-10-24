@@ -108,9 +108,9 @@ def list_running_jenkins_job():
     jobs = [job for job in server.get_jobs() if 'anime' in job['color']]
     jobs_info = [server.get_job_info(job['name']) for job in jobs]
     if jobs_info == []:
-       print ("no jobs found")
+       return "no jobs found"
     else:
-       print  ('\n\n'.join(['%s (%s)\n%s' % (job['name'], job['lastBuild']['url'], job['healthReport'][0]['description']) for job in jobs_info]).strip())
+       return '\n\n'.join(['%s (%s)\n%s' % (job['name'], job['lastBuild']['url'], job['healthReport'][0]['description']) for job in jobs_info]).strip()
   
  
 
