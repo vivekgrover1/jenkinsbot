@@ -95,3 +95,19 @@ def list_jobs_jenkins():
         ['{2})  <{1}|{0}> '.format(job['name'].ljust(max_length), job['url'], (counter + 1)) for counter, job in
          enumerate(jobs)]).strip())
 
+def list_running_jenkins_job():
+
+    jenkins_url = os.environ.get('JENKINS_URL')
+    user_name = os.environ.get('JENKINS_USER')
+    user_pass = os.environ.get('JENKINS_PASS')
+    server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
+                             password='{0}'.format(user_pass))
+    jobs = [job for job in server.get_jobs() if 'anime' in job['color']]
+    jobs_info = [server.get_job_info(job['name']) for job in jobs]
+    if jobs_info == []:
+       print ("no jobs found")
+    else:
+       print  ('\n\n'.join(['%s (%s)\n%s' % (job['name'], job['lastBuild']['url'], job['healthReport'][0]['description']) for job in jobs_info]).strip())
+  
+ 
+
