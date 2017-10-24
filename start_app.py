@@ -65,7 +65,7 @@ def message_actions():
 
 
 if __name__ == "__main__":
-    print ("defined")
+   
     if os.environ.get('SLACK_BOT_TOKEN') is not None:
         print ("defined")
     slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
