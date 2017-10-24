@@ -110,7 +110,7 @@ def list_running_jenkins_job():
     if jobs_info == []:
        return "no jobs found"
     else:
-       return '\n\n'.join(['<%s|%s>\n%s' % (job['name'], job['lastBuild']['url'], job['healthReport'][0]['description']) for job in jobs_info]).strip()
+       return '\n\n'.join(['<{1}|{0}>\n{2}'.format(job['name'], job['lastBuild']['url'], job['healthReport'][0]['description']) for job in jobs_info]).strip()
   
  
 
