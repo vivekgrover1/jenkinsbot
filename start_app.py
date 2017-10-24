@@ -68,6 +68,6 @@ if __name__ == "__main__":
    
     if os.environ.get('SLACK_BOT_TOKEN') is None:
         print ("SLACK_BOT_TOKEN env variable is not defined")
-        break
+    break
     slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
     app.run(host='0.0.0.0', port='80')
