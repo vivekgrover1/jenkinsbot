@@ -68,6 +68,15 @@ if __name__ == "__main__":
    
     if os.environ.get('SLACK_BOT_TOKEN') is None:
         print ("SLACK_BOT_TOKEN env variable is not defined")
-    break
+    elif os.environ.get('CHATBOT_NAME') is None:
+        print ("CHATBOT_NAME env variable is not defined")
+    elif os.environ.get('APPROVER_SLACK_NAME') is None:
+        print ("APPROVER_SLACK_NAME env variable is not defined")
+    elif os.environ.get('JENKINS_URL') is None:
+        print ("JENKINS_URL env variable is not defined")
+    elif os.environ.get('JENKINS_USER') is None:
+        print ("JENKINS_USER env variable is not defined")
+    elif os.environ.get('JENKINS_PASS') is None:
+        print ("JENKINS_PASS env variable is not defined")
     slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
     app.run(host='0.0.0.0', port='80')
