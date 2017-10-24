@@ -124,6 +124,7 @@ def process_slack_output(cmd, chn, msg, usr):
 
 if __name__ == "__main__":
 
+    print ("hi")
     slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
     BOT_NAME = os.environ.get('CHATBOT_NAME')
     BOT_ID = get_bot_id(BOT_NAME, slack_client)
