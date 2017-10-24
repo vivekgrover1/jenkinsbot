@@ -145,7 +145,7 @@ if __name__ == "__main__":
 
     WEBSOCKET_DELAY = 1  # 1 second delay between reading from firehose
     if slack_client.rtm_connect():
-        print("StarterBot connected and running!")
+        print("JenkinsBot_RTM connected and running!")
         while True:
             sc = slack_client.rtm_read()
             command, channel, msg_id, user_id = parse_slack_output(sc)
