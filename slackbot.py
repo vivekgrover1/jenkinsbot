@@ -135,6 +135,7 @@ if __name__ == "__main__":
         print("StarterBot connected and running!")
         while True:
             sc = slack_client.rtm_read()
+            print (sc)
             command, channel, msg_id, user_id = parse_slack_output(sc)
             if command and channel and msg_id and user_id:
                 process_slack_output(command, channel, msg_id, user_id)
