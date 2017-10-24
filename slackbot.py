@@ -129,6 +129,7 @@ if __name__ == "__main__":
     BOT_ID = get_bot_id(BOT_NAME, slack_client)
     AT_BOT = "<@" + BOT_ID + ">"
     threads = []
+    print ("hi")
 
     WEBSOCKET_DELAY = 1  # 1 second delay between reading from firehose
     if slack_client.rtm_connect():
