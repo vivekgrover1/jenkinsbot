@@ -18,7 +18,7 @@ RUN chmod 755 /docker-entrypoint-initdb.d/init.sql && chmod -R 755 /root/bot
 RUN rm -rf /var/lib/apt/lists/* && \
 rm -rf /var/cache/apk/*
 
-RUN export PYTHONUNBUFFERED=0
+ENV PYTHONUNBUFFERED=0
 
 ENV SLACK_BOT_TOKEN="BOT_TOKEN" CHATBOT_NAME="BOT_NAME" \
 APPROVER_SLACK_NAME="APPROVER_SLACK_ID" JENKINS_URL="JENKINS_URL" \
