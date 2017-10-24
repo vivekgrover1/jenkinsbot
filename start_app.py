@@ -65,7 +65,7 @@ def message_actions():
 
 
 if __name__ == "__main__":
-   
+    print ("defined")
     if os.environ.get('SLACK_BOT_TOKEN') is None:
         print ("SLACK_BOT_TOKEN env variable is not defined")
     elif os.environ.get('CHATBOT_NAME') is None:
