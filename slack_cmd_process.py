@@ -8,6 +8,7 @@ import slackbot
 import slack_message
 
 help = """Use below commands to use the bot\n\n@bot_name command list jobs\n
+@bot_name command list running jobs\n
 @bot_name command execute job <job name> \n
 """
 
@@ -32,6 +33,8 @@ def cmd_process(command, username, chann_id):
     if lis[0] == "command" and len(lis) >= 3:
         if len(lis) == 3 and lis[1] == "list" and lis[2] == "jobs":
             return list_jobs_jenkins(), "approved", "good"
+        if len(lis) == 4 and lis[1] == "list" and lis[2] == "running" and lis[3]=="jobs":
+            return list_running_jenkins_job(), "approved", "good"
         if len(lis) == 4 and lis[1] == "execute" and lis[2] == "job" and len(lis[3]) > 0:
             response, status, color = cmd_execute(username, lis[3], chann_id)
             return response, status, color
