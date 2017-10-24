@@ -124,20 +124,17 @@ def process_slack_output(cmd, chn, msg, usr):
 
 if __name__ == "__main__":
 
-    print ("hi")
     slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
     BOT_NAME = os.environ.get('CHATBOT_NAME')
     BOT_ID = get_bot_id(BOT_NAME, slack_client)
     AT_BOT = "<@" + BOT_ID + ">"
     threads = []
-    print ("hi")
 
     WEBSOCKET_DELAY = 1  # 1 second delay between reading from firehose
     if slack_client.rtm_connect():
         print("StarterBot connected and running!")
         while True:
             sc = slack_client.rtm_read()
-            print (sc)
             command, channel, msg_id, user_id = parse_slack_output(sc)
             if command and channel and msg_id and user_id:
                 process_slack_output(command, channel, msg_id, user_id)
