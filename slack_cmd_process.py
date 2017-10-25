@@ -37,7 +37,10 @@ def cmd_process(command, username, chann_id):
         if len(lis) == 4 and lis[1] == "list" and lis[2] == "running" and lis[3]=="jobs":
             return list_running_jenkins_job(), "approved", "good"
         if len(lis) == 4 and lis[1] == "describe" and lis[2] == "job" and len(lis[3]) > 0:
-            return jenkins_describe(lis[3].strip()), "approved", "good"
+            output = jenkins_describe(lis[3].strip())
+            if output == "Sorry, I can't find the job. Typo maybe?" :
+               return output, "approved", "danger"
+            return output, "approved", "good"
         if len(lis) == 4 and lis[1] == "execute" and lis[2] == "job" and len(lis[3]) > 0:
             response, status, color = cmd_execute(username, lis[3], chann_id)
             return response, status, color
@@ -52,7 +55,7 @@ def cmd_execute(username, job_name, chann_id):
                "approval from Admin to execute this command?", "notapproved", "danger"
     elif value == "Approved":
         output = cmd_exec(username, job_name, chann_id)
-        if output == "job could not be found, please try again." :
+        if output == "Sorry, I can't find the job. Typo maybe?" :
             return output, "approved", "danger"
         return output, "approved", "good"
 
