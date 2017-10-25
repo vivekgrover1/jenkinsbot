@@ -82,7 +82,7 @@ def execute_jenkins_job(job_name):
           new_build_number = server.get_job_info('{0}'.format(job_name))['lastCompletedBuild']['number']
       return server.get_build_console_output('{0}'.format(job_name), new_build_number)
     except jenkins.NotFoundException :
-      return "job could not be found, please try again."
+      return "Sorry, I can't find the job. Typo maybe?"
     
 
 
