@@ -66,7 +66,7 @@ def cmd_exec(username, job_name, chann_id):
 
     """
     try:
-        slack_message.send_message_without_button(username, 'Please wait job is being executed, use /'command list running jobs/' to check the progress.', chann_id)
+        slack_message.send_message_without_button(username, 'Please wait job is being executed, use \'command list running jobs\' to check the progress.', chann_id)
         output = execute_jenkins_job(job_name)
         return output
     except:
