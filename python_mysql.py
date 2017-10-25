@@ -36,7 +36,10 @@ def update_status(user):
 def add_user(user):
     db = pymysql.connect("db", "jenkinsbot", "jenkinsbot", "jenkinsbotdb")
     cursor = db.cursor()
-    sql = "insert into jenkinsbot_job_status values ('%s','Not Approved')" % user
+    sql = "If Not Exists(select * from jenkinsbot_job_status where username='{0}') \
+           Begin \
+           insert into jenkinsbot_job_status values ('{0}','Not Approved') End".format(user)
+    #sql = "insert into jenkinsbot_job_status values ('%s','Not Approved')" % user
     try:
         cursor.execute(sql)
         db.commit()
