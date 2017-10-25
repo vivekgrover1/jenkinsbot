@@ -118,10 +118,15 @@ def list_running_jenkins_job():
  
 def jenkins_describe(job_name):
         """Describe the job specified by jobName."""
+        jenkins_url = os.environ.get('JENKINS_URL')
+        user_name = os.environ.get('JENKINS_USER')
+        user_pass = os.environ.get('JENKINS_PASS')
+        server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
+                             password='{0}'.format(user_pass))
 
         try:
-            job = self.jenkins.get_job_info(job_name.strip())
-        except NotFoundException:
+            job = server.get_job_info(job_name.strip())
+        except jenkins.NotFoundException:
             return "Sorry, I can't find the job. Typo maybe?"
 
         return ''.join([
