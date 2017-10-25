@@ -18,8 +18,9 @@ def get_status(user):
     except:
         return "Error: unable to fetch data"
     # disconnect from server
-    db.close()
-    cursor.close()
+    finally:
+      db.close()
+      cursor.close()
 
 
 def update_status(user):
@@ -31,8 +32,9 @@ def update_status(user):
         db.commit()
     except:
         db.rollback()
-    db.close()
-    cursor.close()
+    finally:
+      db.close()
+      cursor.close()
 
 
 def add_user(user):
@@ -45,5 +47,6 @@ def add_user(user):
 
     except:
         db.rollback()
-    db.close()
-    cursor.close()
+    finally:
+      db.close()
+      cursor.close()
