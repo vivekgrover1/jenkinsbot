@@ -61,7 +61,7 @@ def handle_command(command, channel, msg_id, user_id):
     if command == "member joined":
         msg = ":slack: Welcome to the channel, Here you can instruct the jenkinsbot to execute the job based on the " \
               "id.\n\nYou can use @jenkinsbot help message to get the usage details.\n\nPlease note you need to get " \
-              "the Approval from Admin for every job that you will execute. "
+              "the Approval from Admin to build the job in jenkins. "
         python_mysql.add_user(username)
         slack_message.send_message_without_button(username, msg, channel)
     else:
