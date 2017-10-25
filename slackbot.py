@@ -54,6 +54,8 @@ def handle_command(command, channel, msg_id, user_id):
         message to slack thread or message.
     """
     username = get_user_name(user_id, slack_client)
+    value = python_mysql.get_status(username)
+    print (value)
     python_mysql.add_user(username)
 
     if command == "member joined":
