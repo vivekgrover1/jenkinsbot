@@ -9,6 +9,7 @@ import slack_message
 
 help = """Use below commands to use the bot\n\n@bot_name command list jobs\n
 @bot_name command list running jobs\n
+@bot_name command describe job job_name\n
 @bot_name command execute job <job name> \n
 """
 
@@ -35,6 +36,8 @@ def cmd_process(command, username, chann_id):
             return list_jobs_jenkins(), "approved", "good"
         if len(lis) == 4 and lis[1] == "list" and lis[2] == "running" and lis[3]=="jobs":
             return list_running_jenkins_job(), "approved", "good"
+        if len(lis) == 4 and lis[1] == "describe" and lis[2] == "job" and len(lis[3]) > 0:
+            return jenkins_describe(lis[3].strip()), "approved", "good"
         if len(lis) == 4 and lis[1] == "execute" and lis[2] == "job" and len(lis[3]) > 0:
             response, status, color = cmd_execute(username, lis[3], chann_id)
             return response, status, color
@@ -113,4 +116,23 @@ def list_running_jenkins_job():
        return '\n\n'.join(['<{1}|{0}>\n{2}'.format(job['name'], job['lastBuild']['url'], job['healthReport'][0]['description']) for job in jobs_info]).strip()
   
  
+def jenkins_describe(job_name):
+        """Describe the job specified by jobName."""
+
+        try:
+            job = self.jenkins.get_job_info(job_name.strip())
+        except NotFoundException:
+            return "Sorry, I can't find the job. Typo maybe?"
+
+        return ''.join([
+            'Name: ', job['name'], '\n',
+            'URL: ', job['url'], '\n',
+            'Description: ', 'None' if job['description'] is None else job['description'], '\n',
+            'Next Build Number: ',
+            str('None' if job['nextBuildNumber'] is None else job['nextBuildNumber']), '\n',
+            'Last Successful Build Number: ',
+            str('None' if job['lastBuild'] is None else job['lastBuild']['number']), '\n',
+            'Last Successful Build URL: ',
+            'None' if job['lastBuild'] is None else job['lastBuild']['url'], '\n'
+        ])
 
