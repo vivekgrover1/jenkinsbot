@@ -69,7 +69,7 @@ def cmd_exec(username, job_name, chann_id):
     """
     try:
         url=get_job_url(job_name)
-        if url != "not found"
+        if url != "not found":
           slack_message.send_message_without_button(username, 'Please wait job is being executed, use below url to check the progress.\n{0}'.format(url), chann_id)
         output = execute_jenkins_job(job_name)
         return output
