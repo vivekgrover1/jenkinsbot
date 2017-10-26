@@ -7,11 +7,13 @@ import time
 import slackbot
 import slack_message
 
+BOT_NAME = os.environ.get('CHATBOT_NAME')
+
 help = """Use below commands to use the bot\n\n@bot_name command list jobs\n
-@bot_name command list running jobs\n
-@bot_name command describe job job_name\n
-@bot_name command execute job <job name> \n
-"""
+@{0} command list running jobs\n
+@{0} command describe job job_name\n
+@{0} command execute job <job name> \n
+""".format(BOT_NAME)
 
 list_cmd = """List of the Commands:\n
 1) deploy code from abc repository on example1.com server .
