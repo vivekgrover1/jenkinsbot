@@ -68,6 +68,7 @@ def cmd_exec(username, job_name, chann_id):
 
     """
     try:
+        print ('hi')
         url=get_job_url(job_name)
         print (url)
         if url != "not found":
@@ -110,7 +111,8 @@ def list_jobs_jenkins():
          enumerate(jobs)]).strip())
 
 def get_job_url(job_name):
-    jobs = server.get_jobs()
+    jobs = server.get_jobs() 
+    print ('hill')
     for job in jobs:
       if job['name'] == job_name:
         return (job['url'])
