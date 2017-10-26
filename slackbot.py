@@ -63,7 +63,7 @@ def handle_command(command, channel, msg_id, user_id):
               "id.\n\nYou can use @jenkinsbot help message to get the usage details.\n\nPlease note you need to get " \
               "the Approval from Admin to build the job in jenkins. "
         python_mysql.add_user(username)
-        slack_message.send_message_without_button(username, msg, channel)
+        #slack_message.send_message_without_button(username, msg, channel)
     else:
 
         response, status, color= slack_cmd_process.cmd_process(command, username,channel)
