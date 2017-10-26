@@ -11,7 +11,7 @@ BOT_NAME = os.environ.get('CHATBOT_NAME')
 
 help = """Use below commands to use the bot\n\n@{0} command list jobs\n
 @{0} command list running jobs\n
-@{0} command describe job job_name\n
+@{0} command describe job <job_name>\n
 @{0} command execute job <job name> \n
 """.format(BOT_NAME)
 
