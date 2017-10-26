@@ -111,6 +111,11 @@ def list_jobs_jenkins():
          enumerate(jobs)]).strip())
 
 def get_job_url(job_name):
+    jenkins_url = os.environ.get('JENKINS_URL')
+    user_name = os.environ.get('JENKINS_USER')
+    user_pass = os.environ.get('JENKINS_PASS')
+    server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
+                             password='{0}'.format(user_pass))
     jobs = server.get_jobs() 
     print ('hill')
     for job in jobs:
