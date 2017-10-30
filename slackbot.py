@@ -151,6 +151,8 @@ if __name__ == "__main__":
         while True:
             sc = slack_client.rtm_read()
             command, channel, msg_id, user_id = parse_slack_output(sc)
+            if command == "":
+               command = "None"
             if command and channel and msg_id and user_id:
                 process_slack_output(command, channel, msg_id, user_id)
             time.sleep(WEBSOCKET_DELAY)
