@@ -19,7 +19,9 @@ def cmd_process(command, username, chann_id):
       at bot.
     """
     lis = command.split()
-
+    
+    if command.strip() == "None":
+        return help, "approved", "good"
     if command.strip().startswith("hi"):
         return "I am doing good, How about you?", "approved", "good"
     if re.search(r'help|--help|-- help|--\s.*help', command):
