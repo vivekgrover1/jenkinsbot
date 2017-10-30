@@ -7,47 +7,37 @@ import time
 import slackbot
 import slack_message
 
-BOT_NAME = os.environ.get('CHATBOT_NAME')
-
-help = """Use below commands to use the bot\n\n@{0} command list jobs\n
-@{0} command list running jobs\n
-@{0} command describe job <job_name>\n
-@{0} command execute job <job name> \n
-""".format(BOT_NAME)
-
-list_cmd = """List of the Commands:\n
-1) deploy code from abc repository on example1.com server .
-2) deploy code from xyz repository on example2.com server .
-3) restart service on abc server.
+help = """Use below commands to use the bot.\n\n!jenkinsbot list jobs\n
+!jenkinsbot list running jobs\n
+!jenkinsbot describe job <job_name>\n
+!jenkinsbot execute job <job name> \n
 """
-
 
 def cmd_process(command, username, chann_id):
     """
       Decide the command which is to be run based on user message directed
       at bot.
     """
-    lis = command.split(" ")
+    lis = command.split()
 
-    if lis[0].startswith("hi"):
+    if command.strip().startswith("hi"):
         return "I am doing good, How about you?", "approved", "good"
-    if len(lis) == 1 and lis[0] == "help":
+    if re.search(r'help|--help|-- help|--\s.*help', command):
         return help, "approved", "good"
-    if lis[0] == "command" and len(lis) >= 3:
-        if len(lis) == 3 and lis[1] == "list" and lis[2] == "jobs":
-            return list_jobs_jenkins(), "approved", "good"
-        if len(lis) == 4 and lis[1] == "list" and lis[2] == "running" and lis[3]=="jobs":
-            return list_running_jenkins_job(), "approved", "good"
-        if len(lis) == 4 and lis[1] == "describe" and lis[2] == "job" and len(lis[3]) > 0:
-            output = jenkins_describe(lis[3].strip())
-            if output == "Sorry, I can't find the job. Typo maybe?" :
-               return output, "approved", "danger"
-            return output, "approved", "good"
-        if len(lis) == 4 and lis[1] == "execute" and lis[2] == "job" and len(lis[3]) > 0:
-            response, status, color = cmd_execute(username, lis[3], chann_id)
-            return response, status, color
+    if re.search(r'list jobs|jobslist|listjobs|jobs list|list job|job list',command):
+        return list_jobs_jenkins(), "approved", "good"
+    if re.search(r'list running jobs|jobsrunninglist|listrunningjobs|jobs running list|running job|job running list',command):
+        return list_running_jenkins_job(), "approved", "good"
+    if len(lis) == 3 and lis[0] == "describe" and lis[1] == "job" and len(lis[2]) > 0:
+        output = jenkins_describe(lis[2].strip())
+        if output == "Sorry, I can't find the job. Typo maybe?" :
+            return output, "approved", "danger"
+        return output, "approved", "good"
+    if len(lis) == 3 and lis[0] == "execute" and lis[1] == "job" and len(lis[2]) > 0:
+        response, status, color = cmd_execute(username, lis[2], chann_id)
+        return response, status, color
 
-    return "Not sure what you mean, please use help.", "approved", "danger"
+    return "Not sure what you mean, please use help.\n\n{0}".format(help), "approved", "danger"
 
 
 def cmd_execute(username, job_name, chann_id):
@@ -93,7 +83,7 @@ def execute_jenkins_job(job_name):
       return server.get_build_console_output('{0}'.format(job_name), new_build_number)
     except jenkins.NotFoundException :
       return "Sorry, I can't find the job. Typo maybe?"
-    
+
 
 
 def list_jobs_jenkins():
@@ -114,7 +104,7 @@ def get_job_url(job_name):
     user_pass = os.environ.get('JENKINS_PASS')
     server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
                              password='{0}'.format(user_pass))
-    jobs = server.get_jobs() 
+    jobs = server.get_jobs()
     for job in jobs:
       if job['name'] == job_name:
         return (job['url'])
@@ -133,8 +123,8 @@ def list_running_jenkins_job():
        return "no jobs found"
     else:
        return '\n\n'.join(['<{1}|{0}>\n{2}'.format(job['name'], job['lastBuild']['url'], job['healthReport'][0]['description']) for job in jobs_info]).strip()
-  
- 
+
+
 def jenkins_describe(job_name):
         """Describe the job specified by jobName."""
         jenkins_url = os.environ.get('JENKINS_URL')
@@ -159,4 +149,3 @@ def jenkins_describe(job_name):
             'Last Successful Build URL: ',
             'None' if job['lastBuild'] is None else job['lastBuild']['url'], '\n'
         ])
-
