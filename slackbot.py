@@ -54,9 +54,9 @@ def handle_command(command, channel, msg_id, user_id):
         message to slack thread or message.
     """
     username = get_user_name(user_id, slack_client)
-    value = python_mysql.get_status(username)
-    if value == None:
-      python_mysql.add_user(username)
+    #value = python_mysql.get_status(username)
+    #if value == None:
+     # python_mysql.add_user(username)
 
     if command == "member joined":
         msg = ":slack: Welcome to the channel, Here you can instruct the jenkinsbot to execute the job based on the " \
@@ -100,12 +100,12 @@ def parse_slack_output(slack_rtm_output):
 
     if output_list and len(output_list) > 0:
         for output in output_list:
-            if output and 'text' in output and AT_BOT in output['text'] and 'thread_ts' in output:
+            if output and 'text' in output and AT_BOT in output['text'].lower() and 'thread_ts' in output:
                 # return text after the @ mention, whitespace removed
-                return output['text'].split(AT_BOT)[1].strip().lower(), \
+                return output['text'].lower().split(AT_BOT)[1].strip().lower(), \
                        output['channel'], output['thread_ts'], output['user']
-            elif output and 'text' in output and AT_BOT in output['text']:
-                return output['text'].split(AT_BOT)[1].strip().lower(), \
+            elif output and 'text' in output and AT_BOT in output['text'].lower():
+                return output['text'].lower().split(AT_BOT)[1].strip().lower(), \
                        output['channel'], "Thread_False", output['user']
             elif output and 'type' in output and 'member_joined_channel' in output['type']:
                 return "member joined", output['channel'], "Thread_False", output['user']
@@ -138,11 +138,11 @@ if __name__ == "__main__":
         print ("JENKINS_USER env variable is not defined")
     elif os.environ.get('JENKINS_PASS') is None:
         print ("JENKINS_PASS env variable is not defined")
-        
+
     slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
     BOT_NAME = os.environ.get('CHATBOT_NAME')
     BOT_ID = get_bot_id(BOT_NAME, slack_client)
-    AT_BOT = "<@" + BOT_ID + ">"
+    AT_BOT= "!jenkinsbot"
     threads = []
 
     WEBSOCKET_DELAY = 1  # 1 second delay between reading from firehose
