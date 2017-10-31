@@ -9,6 +9,7 @@ import slack_message
 
 help = """Use below commands to use the bot.\n\n!jenkinsbot list jobs\n
 !jenkinsbot list running jobs\n
+!jenkinsbot list failed jobs\n
 !jenkinsbot describe job <job_name>\n
 !jenkinsbot execute job <job name> \n
 """
@@ -30,6 +31,8 @@ def cmd_process(command, username, chann_id):
         return list_jobs_jenkins(), "approved", "good"
     if re.search(r'list running jobs|jobsrunninglist|listrunningjobs|jobs running list|running job|job running list',command):
         return list_running_jenkins_job(), "approved", "good"
+    if re.search(r'list failed jobs|jobsfailedlist|listfailedjobs|jobs failed list|failed job|job failed list| failed',command):
+        return list_failed_jenkins_job(), "approved", "good"
     if len(lis) == 3 and lis[0] == "describe" and lis[1] == "job" and len(lis[2]) > 0:
         output = jenkins_describe(lis[2].strip())
         if output == "Sorry, I can't find the job. Typo maybe?" :
@@ -120,6 +123,20 @@ def list_running_jenkins_job():
     server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
                              password='{0}'.format(user_pass))
     jobs = [job for job in server.get_jobs() if 'anime' in job['color']]
+    jobs_info = [server.get_job_info(job['name']) for job in jobs]
+    if jobs_info == []:
+       return "no jobs found"
+    else:
+       return '\n\n'.join(['<{1}|{0}>\n{2}'.format(job['name'], job['lastBuild']['url'], job['healthReport'][0]['description']) for job in jobs_info]).strip()
+
+def list_failed_jenkins_job():
+
+    jenkins_url = os.environ.get('JENKINS_URL')
+    user_name = os.environ.get('JENKINS_USER')
+    user_pass = os.environ.get('JENKINS_PASS')
+    server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
+                             password='{0}'.format(user_pass))
+    jobs = [job for job in server.get_jobs() if 'red' in job['color']]
     jobs_info = [server.get_job_info(job['name']) for job in jobs]
     if jobs_info == []:
        return "no jobs found"
