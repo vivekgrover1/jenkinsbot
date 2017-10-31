@@ -99,6 +99,7 @@ def list_jobs_jenkins(username,chann_id):
                              password='{0}'.format(user_pass))
     jobs = server.get_jobs()
     slack_message.send_message_without_button(username, "I'm getting the jobs list from Jenkins...", chann_id)
+    time.sleep(2)
     max_length = max([len(job['name']) for job in jobs])
     return ('\n'.join(
         ['{2})  <{1}|{0}> '.format(job['name'].ljust(max_length), job['url'], (counter + 1)) for counter, job in
@@ -126,6 +127,7 @@ def list_running_jenkins_job(username,chann_id):
     jobs = [job for job in server.get_jobs() if 'anime' in job['color']]
     jobs_info = [server.get_job_info(job['name']) for job in jobs]
     slack_message.send_message_without_button(username, "I will ask for the current running builds list!", chann_id)
+    time.sleep(2)
     if jobs_info == []:
        return "There is no running jobs!"
     else:
@@ -141,6 +143,7 @@ def list_failed_jenkins_job(username,chann_id):
     jobs = [job for job in server.get_jobs() if 'red' in job['color']]
     jobs_info = [server.get_job_info(job['name']) for job in jobs]
     slack_message.send_message_without_button(username, "I will get the failed jenkins job!", chann_id)
+    time.sleep(2)
     if jobs_info == []:
        return "There is no failed jobs!"
     else:
