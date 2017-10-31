@@ -27,7 +27,7 @@ def cmd_process(command, username, chann_id):
         return "I am doing good, How about you?", "approved", "good"
     if re.search(r'help|--help|-- help|--\s.*help', command):
         return help, "approved", "good"
-    if re.search(r'list jobs|jobslist|listjobs|jobs list|list job|job list|list',command):
+    if re.search(r'list jobs|jobslist|listjobs|jobs list|list job|job list',command):
         return list_jobs_jenkins(username,chann_id), "approved", "good"
     if re.search(r'list running jobs|jobsrunninglist|listrunningjobs|jobs running list|running job|job running list|running',command):
         return list_running_jenkins_job(username,chann_id), "approved", "good"
