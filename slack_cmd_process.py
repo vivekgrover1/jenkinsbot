@@ -28,11 +28,11 @@ def cmd_process(command, username, chann_id):
     if re.search(r'help|--help|-- help|--\s.*help', command):
         return help, "approved", "good"
     if re.search(r'list jobs|jobslist|listjobs|jobs list|list job|job list|list',command):
-        return list_jobs_jenkins(), "approved", "good"
+        return list_jobs_jenkins(username,chann_id), "approved", "good"
     if re.search(r'list running jobs|jobsrunninglist|listrunningjobs|jobs running list|running job|job running list|running',command):
-        return list_running_jenkins_job(), "approved", "good"
+        return list_running_jenkins_job(username,chann_id), "approved", "good"
     if re.search(r'list failed jobs|jobsfailedlist|listfailedjobs|jobs failed list|failed job|job failed list|failed',command):
-        return list_failed_jenkins_job(), "approved", "good"
+        return list_failed_jenkins_job(username,chann_id), "approved", "good"
     if len(lis) == 3 and lis[0] == "describe" and lis[1] == "job" and len(lis[2]) > 0:
         output = jenkins_describe(lis[2].strip())
         if output == "Sorry, I can't find the job. Typo maybe?" :
@@ -91,13 +91,14 @@ def execute_jenkins_job(job_name):
 
 
 
-def list_jobs_jenkins():
+def list_jobs_jenkins(username,chann_id):
     jenkins_url = os.environ.get('JENKINS_URL')
     user_name = os.environ.get('JENKINS_USER')
     user_pass = os.environ.get('JENKINS_PASS')
     server = jenkins.Jenkins('{0}'.format(jenkins_url), username='{0}'.format(user_name),
                              password='{0}'.format(user_pass))
     jobs = server.get_jobs()
+    slack_message.send_message_without_button(username, "I'm getting the jobs list from Jenkins...", chann_id)
     max_length = max([len(job['name']) for job in jobs])
     return ('\n'.join(
         ['{2})  <{1}|{0}> '.format(job['name'].ljust(max_length), job['url'], (counter + 1)) for counter, job in
@@ -115,7 +116,7 @@ def get_job_url(job_name):
         return (job['url'])
     return "not found"
 
-def list_running_jenkins_job():
+def list_running_jenkins_job(username,chann_id):
 
     jenkins_url = os.environ.get('JENKINS_URL')
     user_name = os.environ.get('JENKINS_USER')
@@ -124,12 +125,13 @@ def list_running_jenkins_job():
                              password='{0}'.format(user_pass))
     jobs = [job for job in server.get_jobs() if 'anime' in job['color']]
     jobs_info = [server.get_job_info(job['name']) for job in jobs]
+    slack_message.send_message_without_button(username, "I will ask for the current running builds list!", chann_id)
     if jobs_info == []:
-       return "no jobs found"
+       return "There is no running jobs!"
     else:
        return '\n\n'.join(['<{1}|{0}>\n{2}'.format(job['name'], job['lastBuild']['url'], job['healthReport'][0]['description']) for job in jobs_info]).strip()
 
-def list_failed_jenkins_job():
+def list_failed_jenkins_job(username,chann_id):
 
     jenkins_url = os.environ.get('JENKINS_URL')
     user_name = os.environ.get('JENKINS_USER')
@@ -138,8 +140,9 @@ def list_failed_jenkins_job():
                              password='{0}'.format(user_pass))
     jobs = [job for job in server.get_jobs() if 'red' in job['color']]
     jobs_info = [server.get_job_info(job['name']) for job in jobs]
+    slack_message.send_message_without_button(username, "I will get the failed jenkins job!", chann_id)
     if jobs_info == []:
-       return "no jobs found"
+       return "There is no failed jobs!"
     else:
        return '\n\n'.join(['<{1}|{0}>\n{2}'.format(job['name'], job['lastBuild']['url'], job['healthReport'][0]['description']) for job in jobs_info]).strip()
 
