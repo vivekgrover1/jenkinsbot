@@ -101,11 +101,11 @@ def parse_slack_output(slack_rtm_output):
 
     if output_list and len(output_list) > 0:
         for output in output_list:
-            if output and 'text' in output and AT_BOT in output['text'].lower() and 'thread_ts' in output:
+            if output and 'text' in output and AT_BOT in output['text'].lower() and re.match(r'!',output['text'].lower()) and 'thread_ts' in output:
                 # return text after the @ mention, whitespace removed
                 return output['text'].lower().split(AT_BOT)[1].strip().lower(), \
                        output['channel'], output['thread_ts'], output['user']
-            elif output and 'text' in output and AT_BOT in output['text'].lower():
+            elif output and 'text' in output and AT_BOT in output['text'].lower() and re.match(r'!',output['text'].lower()):
                 return output['text'].lower().split(AT_BOT)[1].strip().lower(), \
                        output['channel'], "Thread_False", output['user']
             elif output and 'type' in output and 'member_joined_channel' in output['type']:
@@ -152,9 +152,7 @@ if __name__ == "__main__":
         while True:
             sc = slack_client.rtm_read()
             command, channel, msg_id, user_id = parse_slack_output(sc)
-            if command == "":
-               command = "None"
-            if re.search(r'^!', command) and channel and msg_id and user_id:
+            if command and channel and msg_id and user_id:
                 process_slack_output(command, channel, msg_id, user_id)
             time.sleep(WEBSOCKET_DELAY)
     else:
