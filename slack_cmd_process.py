@@ -7,11 +7,11 @@ import time
 import slackbot
 import slack_message
 
-help = """Use below commands to use the bot.\n\n!jenkinsbot list jobs\n
-!jenkinsbot list running jobs\n
-!jenkinsbot list failed jobs\n
-!jenkinsbot describe job <job_name>\n
-!jenkinsbot execute job <job name> \n
+help = """Use below commands to use the bot.\n\n!list jobs\n
+!list running jobs\n
+!list failed jobs\n
+!describe job <job_name>\n
+!execute job <job name> \n
 """
 
 
