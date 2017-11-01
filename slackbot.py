@@ -142,7 +142,7 @@ if __name__ == "__main__":
     slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
     BOT_NAME = os.environ.get('CHATBOT_NAME')
     BOT_ID = get_bot_id(BOT_NAME, slack_client)
-    AT_BOT= "!jenkinsbot"
+    AT_BOT= "!"
     threads = []
 
     WEBSOCKET_DELAY = 1  # 1 second delay between reading from firehose
