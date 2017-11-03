@@ -4,7 +4,7 @@ import subprocess
 from slackclient import SlackClient
 import slack_cmd_process
 import threading
-import python_mysql
+import jenkins_bot_pickledb
 import slack_message
 import re
 
@@ -55,15 +55,15 @@ def handle_command(command, channel, msg_id, user_id):
         message to slack thread or message.
     """
     username = get_user_name(user_id, slack_client)
-    value = python_mysql.get_status(username)
+    value = jenkins_bot_pickledb.get_status(username)
     if value is None:
-        python_mysql.add_user(username)
+        jenkins_bot_pickledb.add_user(username)
 
     if command == "member joined":
         msg = ":slack: Welcome to the channel, Here you can instruct the jenkinsbot to execute the job based on the " \
               "id.\n\nYou can use @jenkinsbot help message to get the usage details.\n\nPlease note you need to get " \
               "the Approval from Admin to build the job in jenkins. "
-        python_mysql.add_user(username)
+        jenkins_bot_pickledb.add_user(username)
         # slack_message.send_message_without_button(username, msg, channel)
     else:
 
