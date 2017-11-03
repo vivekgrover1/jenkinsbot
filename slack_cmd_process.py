@@ -1,5 +1,5 @@
 import os
-import python_mysql
+import jenkins_bot_pickledb
 import re
 import subprocess
 import jenkins
@@ -50,7 +50,7 @@ def cmd_process(command, username, chann_id):
 
 
 def cmd_execute(username, job_name, chann_id):
-    value = python_mysql.get_status(username)
+    value = jenkins_bot_pickledb.get_status(username)
     if value != "Approved":
         return ":slightly_frowning_face: You don't have Approval to execute the job.\nWould you like to get the " \
                "approval from Admin to execute this command?", "notapproved", "danger"
