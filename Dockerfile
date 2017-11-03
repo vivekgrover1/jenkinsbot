@@ -17,5 +17,3 @@ RUN rm -rf /var/lib/apt/lists/* && \
 rm -rf /var/cache/apk/*
 
 ENV PYTHONUNBUFFERED=0
-
-
