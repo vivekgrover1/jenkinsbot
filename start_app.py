@@ -3,7 +3,7 @@ from slackclient import SlackClient
 import json
 import os
 import slackbot
-import python_mysql
+import jenkins_bot_pickledb
 import slack_message
 
 # Flask webserver for incoming traffic from Slack
@@ -57,7 +57,7 @@ def message_actions():
     elif selection == "Approve":
         mesg = "Thanks, I will inform the user!"
         slack_message.update_message(chan_id, msg_ts, mesg)
-        python_mysql.update_status(user_id)
+        jenkins_bot_pickledb.update_status(user_id)
         mesg2 = "Your Request has been approved now you can execute the command"
         slack_message.send_message_without_button(user_id, mesg2, user_chan_id)
 
