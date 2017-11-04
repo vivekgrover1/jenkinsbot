@@ -9,6 +9,7 @@ def update_status(user):
 
   db = pickledb.load('jenkinsbot.db', False)
   db.set(user, 'Approved')
+  print (db.getall())
   db.dump()
 
 
