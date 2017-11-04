@@ -51,6 +51,7 @@ def cmd_process(command, username, chann_id):
 
 def cmd_execute(username, job_name, chann_id):
     value = jenkins_bot_pickledb.get_status(username)
+    print (value)
     if value != "Approved":
         return ":slightly_frowning_face: You don't have Approval to execute the job.\nWould you like to get the " \
                "approval from Admin to execute this command?", "notapproved", "danger"
