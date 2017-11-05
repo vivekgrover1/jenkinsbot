@@ -13,6 +13,8 @@ COPY jenkins_bot_pickledb.py slack_cmd_process.py slack_message.py slackbot.py s
 
 RUN chmod -R 755 /root/bot
 
+RUN pip3.5 install tinydb
+
 RUN rm -rf /var/lib/apt/lists/* && \
 rm -rf /var/cache/apk/*
 
