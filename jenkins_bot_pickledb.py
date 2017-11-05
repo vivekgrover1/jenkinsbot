@@ -1,23 +1,24 @@
-import pickledb
+from tinydb import TinyDB, Query
 
 def get_status(user):
 
-  db = pickledb.load('jenkinsbot.db', False)
-  return db.get(user)
+  db = TinyDB('tinydb.json')
+  User = Query()
+  userdata=db.search(User.username == user)
+  print (userdata[0]['status'])
 
 def update_status(user):
 
-  db = pickledb.load('jenkinsbot.db', False)
-  db.set(user, 'Approved')
-  db.dump()
-  print (db.get(user))
-  
+  db = TinyDB('tinydb.json')
+  User = Query()
+  db.update({'status':'Approved'},User.username == user)
 
 
 def add_user(user):
 
-  db = pickledb.load('jenkinsbot.db', False)
-  db.set(user, 'Not Approved')
-  db.dump()
-
-
+  db = TinyDB('tinydb.json')
+  User = Query()
+  userdata=db.search(User.username == user)
+  print (userdata)
+  if userdata == []:
+   db.insert({'username': user, 'status': 'Not Approved'})
